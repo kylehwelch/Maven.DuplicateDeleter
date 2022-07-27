@@ -14,28 +14,33 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
     @Override
     public Integer[] removeDuplicates(int maxNumberOfDuplications) {
         int count;
-        for (int i : array)
+        Integer[] arrayDupe = new Integer[array.length];
+        for (int i = 0 ; i < array.length ; i++) {
+            arrayDupe[i] = array[i];
+        }
+
+        for (int i = 0 ; i < array.length ; i++)
             {
                 count = 0;
                 for (int j = 0; j < array.length; j++) {
-                   if (array[j] == i) {
+                    if (arrayDupe[j] == arrayDupe[i]) {
                        count++;
                     }
                 }
                 if (count >= maxNumberOfDuplications) {
                     for (int j = 0; j < array.length; j++) {
-                        if (array[j] == i) {
+                        if (arrayDupe[j] == arrayDupe[i]) {
                             array[j] = null;
                         }
                     }
                 }
             }
         Integer[] answer = new Integer[noNullLength(array)];
-        int twocount = 0;
+        count = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] != null) {
-                answer[twocount] = array[i];
-                twocount++;
+                answer[count] = array[i];
+                count++;
             }
         }
         return answer;
@@ -43,7 +48,37 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 
     @Override
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-        return new Integer[0];
+        int count;
+        Integer[] arrayDupe = new Integer[array.length];
+        for (int i = 0 ; i < array.length ; i++) {
+            arrayDupe[i] = array[i];
+        }
+
+        for (int i = 0 ; i < array.length ; i++)
+        {
+            count = 0;
+            for (int j = 0; j < array.length; j++) {
+                if (arrayDupe[j] == arrayDupe[i]) {
+                    count++;
+                }
+            }
+            if (count == exactNumberOfDuplications) {
+                for (int j = 0; j < array.length; j++) {
+                    if (arrayDupe[j] == arrayDupe[i]) {
+                        array[j] = null;
+                    }
+                }
+            }
+        }
+        Integer[] answer = new Integer[noNullLength(array)];
+        count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != null) {
+                answer[count] = array[i];
+                count++;
+            }
+        }
+        return answer;
     }
 
     @Override

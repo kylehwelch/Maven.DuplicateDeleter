@@ -11,12 +11,73 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
 
     @Override
     public String[] removeDuplicates(int maxNumberOfDuplications) {
-        return new String[0];
+        int count;
+
+        String[] arrayDupe = new String[array.length];
+        for (int i = 0 ; i < array.length ; i++) {
+            arrayDupe[i] = array[i];
+        }
+
+        for (int i = 0 ; i < array.length ; i++)
+        {
+            count = 0;
+            for (int j = 0; j < array.length; j++) {
+                if (arrayDupe[j] == arrayDupe[i]) {
+                    count++;
+                }
+            }
+            if (count >= maxNumberOfDuplications) {
+                for (int j = 0; j < array.length; j++) {
+                    if (arrayDupe[j] == arrayDupe[i]) {
+                        array[j] = null;
+                    }
+                }
+            }
+        }
+        String[] answer = new String[noNullLength(array)];
+        count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != null) {
+                answer[count] = array[i];
+                count++;
+            }
+        }
+        return answer;
     }
 
     @Override
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-        return new String[0];
+        int count;
+        String[] arrayDupe = new String[array.length];
+        for (int i = 0 ; i < array.length ; i++) {
+            arrayDupe[i] = array[i];
+        }
+
+        for (int i = 0 ; i < array.length ; i++)
+        {
+            count = 0;
+            for (int j = 0; j < array.length; j++) {
+                if (arrayDupe[j] == arrayDupe[i]) {
+                    count++;
+                }
+            }
+            if (count == exactNumberOfDuplications) {
+                for (int j = 0; j < array.length; j++) {
+                    if (arrayDupe[j] == arrayDupe[i]) {
+                        array[j] = null;
+                    }
+                }
+            }
+        }
+        String[] answer = new String[noNullLength(array)];
+        count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != null) {
+                answer[count] = array[i];
+                count++;
+            }
+        }
+        return answer;
     }
 
     @Override
